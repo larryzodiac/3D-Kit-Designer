@@ -5,8 +5,8 @@ function init() {
 	// ENV
 	var scene = new THREE.Scene();
 
-	var axesHelper = new THREE.AxesHelper(100);
-	// scene.add(axesHelper);
+	// var axesHelper = new THREE.AxesHelper(100);
+	// // scene.add(axesHelper);
 
 	var enableFog = false;
 
