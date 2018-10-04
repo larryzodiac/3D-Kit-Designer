@@ -1,0 +1,385 @@
+body, html {
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.scene {
+  /* Our 3D world, we want this to fill the window  */
+  z-index: 1;
+  position: fixed;
+  margin-top: 30px;
+  left: 11%;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+}
+
+.logo {
+  /* Where is say Kit Builder at the top left */
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-right: 25px;
+  padding-top: 50px;
+  padding-left: 95px;
+  fill: black;
+  font-size: 98px;
+  font-weight: 600;
+}
+
+.helpButton {
+  /* The ? mark at the top right */
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding-right: 110px;
+  padding-top: 50px;
+  padding-left: 0px;
+  fill: black;
+  font-size: 90px;
+  font-weight: 600;
+}
+
+.rotateRight {
+  /* Both rotates don't work but are placed either side of the model */
+  z-index: 2000;
+  position: fixed;
+  top: 45%;
+  right: 21%;
+  fill: black;
+  font-size: 100px;
+  font-weight: 100;
+}
+
+.rotateLeft {
+  /* Both rotates don't work but are placed either side of the model */
+  z-index: 2000;
+  position: fixed;
+  top: 45%;
+  left: 43%;
+  fill: black;
+  font-size: 100px;
+  font-weight: 100;
+}
+
+/* Use this next part when we get the rotate buttons working */
+
+/*
+.logo, .helpButton, .rotateRight, .rotateLeft {
+  color: black;
+  -webkit-transition: color 0.5s linear;
+  -ms-transition: color 0.5s linear;
+  transition: color 0.5s linear;
+}
+
+.logo:hover, .helpButton:hover, .rotateRight:hover, .rotateLeft:hover {
+  color: blue;
+  cursor: pointer;
+}
+*/
+
+.logo, .helpButton, .paletteButton {
+  color: black;
+  -webkit-transition: color 0.5s linear;
+  transition: color 0.5s linear;
+}
+
+.logo:hover, .helpButton:hover, .paletteButton:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.rotateRight, .rotateLeft {
+  color: #e8e8e8;
+}
+
+.rotateRight:hover, .rotateLeft:hover {
+  cursor: default;
+}
+
+/* Next is styles for help window pop-out */
+
+.helpWindow {
+  z-index: 3000;
+  position: fixed;
+  width: 25%;
+  height: 100%;
+  right: -100%;
+  overflow-x: hidden;
+  background: #0000ff;
+  /* background: #054ada; */
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.helpActive {
+  /* right: 250px; */
+  width: 25%;
+  right: 0px;
+  box-shadow: -5px 0px 18px #888888;
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.windowHeader {
+  font-size: 50px;
+  font-weight: 600;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  color: white;
+  margin-bottom: 50px;
+  letter-spacing: 2px;
+}
+
+.windowText {
+  font-size: 20px;
+  font-weight: 100;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  color: white;
+  margin-bottom: 0px;
+  letter-spacing: 2px;
+}
+
+.helpChevron {
+  stroke: white;
+  position: absolute;
+  right: 80px;
+  top: 58px;
+  /* color: white; */
+  -webkit-transition: stroke 0.5s linear;
+  transition: stroke 0.5s linear;
+}
+
+.helpChevron:hover {
+  stroke: black;
+  cursor: pointer;
+}
+
+.chevronSvg {
+    width: 2.8vw;
+}
+
+.paletteChevronSvg {
+    width: 3.2vw;
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.paletteChevronSvg:hover {
+    cursor: pointer;
+    /* margin-bottom: 0.5vw; */
+    /* -ms-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg); */
+    transform: scale(1.2);
+    -webkit-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+/* Next is all palette */
+
+.paletteHeader {
+  /* Where is say Kit Builder at the top left */
+  z-index: 2000;
+  position: fixed;
+  /* top: 0;
+  left: 0; */
+  padding-right: 25px;
+  padding-top: 25px;
+  padding-left: 45px;
+  fill: black;
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.palette {
+  z-index: 3000;
+  position: fixed;
+  width: 25%;
+  height: 80%;
+  left: 100px;
+  bottom: -70%;
+  overflow-y: hidden;
+  background: #fff;
+  border: 1.5px dashed blue;
+  /* background: #054ada; */
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.paletteActive {
+  /* right: 250px; */
+  width: 25%;
+  left: 100px;
+  bottom: -60px;
+  border: 1.5px dashed blue;
+  /* box-shadow: -5px 0px 18px #888888; */
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.paletteChevron {
+  stroke: black;
+  position: absolute;
+  right: 50px;
+  top: 10px;
+  /* color: white; */
+  -webkit-transition: stroke 0.5s linear;
+  transition: stroke 0.5s linear;
+}
+
+.paletteChevron:hover {
+  stroke: blue;
+  cursor: pointer;
+}
+
+.paletteChevronClosed {
+  -ms-transform: rotate(-90deg); /* IE 9 */
+  -webkit-transform: rotate(-90deg); /* Safari 3-8 */
+  transform: rotate(-90deg);
+}
+
+.paletteChevronOpen {
+  top: 35px;
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari 3-8 */
+  transform: rotate(90deg);
+}
+
+.paletteRows {
+  position: absolute;
+  left: 48px;
+  top: 100px;
+  /* padding-left: 48px;
+  padding-top  */
+  /* color: white; */
+  -webkit-transition: stroke 0.5s linear;
+  transition: stroke 0.5s linear;
+}
+
+.colourBox svg {
+  padding-top: 15px;
+  padding-right: 15px;
+}
+
+.selectorWindow {
+  z-index: 3000;
+  position: fixed;
+  box-sizing: border-box;
+  padding-left: 2vw;
+  padding-top: 1vw;
+  left: 100px;
+  top: 26%;
+  width: 25.1%;
+  height: 50%;
+  overflow: hidden;
+  background-color: white;
+  /* background: #054ada; */
+  border: 1.5px dashed black;
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.selectorWindow:hover {
+  border: 1.5px dashed blue;
+}
+
+.selectorText {
+  /* background-color: black; */
+  width: 100%;
+  height: 15%;
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+  margin-bottom: 10px;
+}
+
+.selectorText p {
+  z-index: 2000;
+  position: fixed;
+  /* top: 0;
+  left: 0; */
+  /* padding-right: 25px; */
+  padding-top: 0.6vw;
+  padding-left: 4.5vw;
+  color: black;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-size: 40px;
+  font-weight: 200;
+  -webkit-transition: color 0.5s linear;
+  transition: color 0.5s linear;
+}
+
+.selectorText:hover {
+  cursor: pointer;
+  padding-left: 1vw;
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.selectorText svg {
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.selectorText:hover svg {
+  transform: scale(1.2);
+  -webkit-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+.selectorText a {
+  padding-top: 0.5vw;
+  padding-left: 0.5vw;
+  position: fixed;
+  display: inline-block;
+  /* width: 20%; */
+}
+
+.selectorChevronSvg {
+  width: 3.2vw;
+}
+
+.selectHeader {
+  z-index: 2000;
+  height: 10%
+  position: fixed;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  fill: black;
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.reset {
+  /* Where is say Kit Builder at the top left */
+  z-index: 2000;
+  position: fixed;
+  top: 87%;
+  left: 56%;
+  /* margin-right: 50px; */
+  /* padding-top: 35px;
+  padding-left: 45px; */
+  color: #bcbcbc;
+  font-size: 30px;
+  font-weight: 200;
+  -webkit-transition: color 0.5s linear;
+  transition: color 0.5s linear;
+}
+
+.reset:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.texture {
+  visibility: hidden;
+  overflow: hidden;
+}

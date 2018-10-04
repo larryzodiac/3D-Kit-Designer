@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<!-- //////////////////////////////// -->
+  <head>
+    <title>Kit Builder</title>
+    <!-- -->
+    <meta charset="utf-8">
+    <!-- Style -->
+    <link rel="stylesheet" href="lib/css/style.css">
+    <!-- Type -->
+    <!-- IBM PLex Sans -->
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,200,400,600" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Three.js + Utilities-->
+    <script src="http://threejs.org/build/three.js"></script>
+    <script src="lib/js/utils/three.js"></script>
+    <script src="lib/js/utils/Tween.min.js"></script>
+    <script src="lib/js/utils/OrbitControls.js"></script>
+  </head>
+<!-- //////////////////////////////// -->
+  <body>
+    <div class="logo">Kit Builder</div>
+    <div class="helpWindow" id="helpWindow">
+      <a id="helpWindowClose" class="helpChevron">
+        <svg class="chevronSvg" x="0px" y="0px" viewBox="0 0 15.4 15.4" xml:space="preserve">
+          <g>
+            <polyline vector-effect="non-scaling-stroke" stroke-width="2" fill="none" stroke-miter="" limit="10" points="0.4,15 7.7,7.7 0.4,0.4"></polyline>
+            <!-- <polyline vector-effect="non-scaling-stroke" stroke-width="2" fill="none" stroke-miter="" limit="10" points="15,15 7.7,7.7 15,0.4 	"></polyline> -->
+          </g>
+        </svg>
+      </a>
+      <p class="windowHeader"><i>HALLLP!</i></p>
+      <p class="windowText"><i>What in the lamb is this contraption?</i></p>
+      <p class="windowText">-----------------------------</p>
+      <p class="windowText"><i>01.</i> Use the cursor to rotate the 3D jersey model.</p>
+      <p class="windowText"><i>02.</i> Use the options list on the left of your screen to edit the model.</p>
+      <p class="windowText"><i>03.</i> Use the palette to edit the fill colour of the area you selected.</p>
+      <p class="windowText">-----------------------------</p>
+      <p class="windowText"><i>Wow, what sorcery!</i></p>
+      <p class="windowText">But yeah, tell Evan if you notice any goofs tanku.</p>
+
+    </div>
+    <div class="helpButton" id="helpButton">?</div>
+    <div class="reset" id="resetCamera">Reset Camera</div>
+    <div class="rotateRight" id="rotateRight">></div>
+    <div class="rotateLeft"><</div>
+    <div class="selectorWindow">
+      <div class="selectHeader">Select jersey colours</div>
+      <div class="selectorText" id="primary">
+        <a class="">
+          <svg class="selectorChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="primarySelectorSvg" vector-effect="non-scaling-stroke" fill="#F37021" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <p>Primary</p>
+      </div>
+      <div class="selectorText" id="secondary">
+        <a class="">
+          <svg class="selectorChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="secondarySelectorSvg" vector-effect="non-scaling-stroke" fill="#008C49" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <p>Secondary</p>
+      </div>
+      <div class="selectorText" id="tertiary">
+        <a class="">
+          <svg class="selectorChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="tertiarySelectorSvg" vector-effect="non-scaling-stroke" fill="#C9191F" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <p>Tertiary</p>
+      </div>
+      <div class="selectorText" id="accent">
+        <a class="">
+          <svg class="selectorChevronSvg accentSelectorSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="accentSelectorSvg" vector-effect="non-scaling-stroke" fill="#C7A0CB" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <p>Accent</p>
+      </div>
+    </div>
+    <div class="palette" id="palette">
+      <div class="paletteHeader">Palette</div>
+      <a id="paletteWindowToggle" class="paletteChevron paletteChevronClosed">
+        <svg class="chevronSvg" x="0px" y="0px" viewBox="0 0 15.4 15.4" xml:space="preserve">
+          <g>
+            <polyline vector-effect="non-scaling-stroke" stroke-width="2" fill="none" stroke-miter="" limit="10" points="0.4,15 7.7,7.7 0.4,0.4"></polyline>
+            <!-- <polyline vector-effect="non-scaling-stroke" stroke-width="2" fill="none" stroke-miter="" limit="10" points="15,15 7.7,7.7 15,0.4 	"></polyline> -->
+          </g>
+        </svg>
+      </a>
+      <div class="paletteRows">
+        <!-- ///// White ///// -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="white" vector-effect="non-scaling-stroke" fill="#FEFEFE" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+              <!-- <rect width="15" height="15" stroke-width="0.1" fill="none"/> -->
+          </svg>
+        </a>
+        <!-- Light grey -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lightGrey" vector-effect="non-scaling-stroke" fill="#C7C8CA" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Mid grey -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="midGrey" vector-effect="non-scaling-stroke" fill="#939598" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Dark grey -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="darkGrey" vector-effect="non-scaling-stroke" fill="#636466" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Black -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="black" vector-effect="non-scaling-stroke" fill="#231F20" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Blues ///// -->
+        <!-- Azure -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="azure" vector-effect="non-scaling-stroke" fill="#ABE1FA" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+              <!-- <rect width="15" height="15" stroke-width="0.1" fill="none"/> -->
+          </svg>
+        </a>
+        <!-- Sky -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="sky" vector-effect="non-scaling-stroke" fill="#3698D4" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Royal -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="royal" vector-effect="non-scaling-stroke" fill="#0060A9" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Navy -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="navy" vector-effect="non-scaling-stroke" fill="#00184A" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Dark Navy -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="darkNavy" vector-effect="non-scaling-stroke" fill="#000032" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Greens ///// -->
+        <!-- Dark Green -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="darkGreen" vector-effect="non-scaling-stroke" fill="#003C20" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Forest -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="forest" vector-effect="non-scaling-stroke" fill="#00593B" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Emerald -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="emerald" vector-effect="non-scaling-stroke" fill="#008C49" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Jade -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="jade" vector-effect="non-scaling-stroke" fill="#00A14B" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Lime -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lime" vector-effect="non-scaling-stroke" fill="#72BF44" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Reds ///// -->
+        <!-- Maroon -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="maroon" vector-effect="non-scaling-stroke" fill="#7A1315" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Scarlet -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="scarlet" vector-effect="non-scaling-stroke" fill="#C9191F" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Bright red -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="brightRed" vector-effect="non-scaling-stroke" fill="#ED1C24" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Light Red -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lightRed" vector-effect="non-scaling-stroke" fill="#EF4345" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Tangerine -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="tangerine" vector-effect="non-scaling-stroke" fill="#F04E23" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Yellows ///// -->
+        <!-- Orange -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="orange" vector-effect="non-scaling-stroke" fill="#F37021" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Amber -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="amber" vector-effect="non-scaling-stroke" fill="#FBAA29" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Gold -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="gold" vector-effect="non-scaling-stroke" fill="#FFD400" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Yellow -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="yellow" vector-effect="non-scaling-stroke" fill="#FFF200" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Lemon -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lemon" vector-effect="non-scaling-stroke" fill="#FFF9AE" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Purples ///// -->
+        <!-- Liche purple -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lichePurple" vector-effect="non-scaling-stroke" fill="#45196F" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Emperors children -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="emperorsChildren" vector-effect="non-scaling-stroke" fill="#662D91" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Lavender -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lavender" vector-effect="non-scaling-stroke" fill="#956DAF" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Lilac -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="lilac" vector-effect="non-scaling-stroke" fill="#C7A0CB" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- velvet -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="velvet" vector-effect="non-scaling-stroke" fill="#D3C8E3" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- ///// Pinks ///// -->
+        <!-- Burgundy -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="burgundy" vector-effect="non-scaling-stroke" fill="#7A003C" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Raspberry -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="raspberry" vector-effect="non-scaling-stroke" fill="#9E1F63" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Grape -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="grape" vector-effect="non-scaling-stroke" fill="#D11A6F  " stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Magenta -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="magenta" vector-effect="non-scaling-stroke" fill="#EC008C" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+        <!-- Rhubarb -->
+        <a class="colourBox">
+          <svg class="paletteChevronSvg" x="0px" y="0px" viewBox="0 0 20 20" xml:space="preserve">
+              <polyline id="rhubarb" vector-effect="non-scaling-stroke" fill="#EE3E7B" stroke-miter="" limit="10" points="0,0 20,0 20,20 0,20 0,0"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <main class="scene" id="webgl"></main>
+    <div id="texture" class="texture">
+      <svg width="1000" height="1000" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <rect id="primaryOnSvg" class="primary" width="1000" height="1000" fill="white"/>
+        <circle id="secondaryOnSvg" class="secondary" cx="810" cy="300" r="200" fill="white"/>
+        <rect id="tertiaryOnSvg" class="tertiary" x="0" y="500" width="1000" height="500" fill="white"/>
+        <rect id="accentOnSvg" class="accent" x="0" y="400" width="1000" height="100" fill="white"/>
+      </svg>
+    </div>
+    <!-- Working Three.js -->
+    <script src="lib/js/functions/colour.js"></script>
+    <script src="lib/js/functions/getSvg.js"></script>
+    <script src="lib/js/functions/getShapes.js"></script>
+    <script src="lib/js/functions/getLights.js"></script>
+    <script src="lib/js/functions/rotate.js"></script>
+    <script src="lib/js/functions/update.js"></script>
+    <script src="lib/js/functions/windows.js"></script>
+    <script src="lib/js/functions/windowResize.js"></script>
+    <script src="lib/js/init.js"></script>
+  </body>
+<!-- //////////////////////////////// -->
+</html>
